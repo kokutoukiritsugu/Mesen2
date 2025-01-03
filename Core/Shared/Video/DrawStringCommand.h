@@ -12,7 +12,7 @@ private:
 	//Taken from FCEUX's LUA code
 	static constexpr int _tabSpace = 4;
 
-	static unordered_map<int, char const*> _jpFont;
+	static unordered_map<int, char const*> _uniFont;
 
 	static constexpr uint8_t _font[792] = {
 		6,  0,  0,  0,  0,  0,  0,  0,	// 0x20 - Spacebar
@@ -177,8 +177,8 @@ protected:
 					code |= ((uint8_t)_text[i + 1]) << 8;
 					code |= ((uint8_t)_text[i + 2]) << 16;
 
-					auto res = _jpFont.find(code);
-					if(res != _jpFont.end()) {
+					auto res = _uniFont.find(code);
+					if(res != _uniFont.end()) {
 						lineWidth += 8;
 						if(_maxWidth > 0 && lineWidth > _maxWidth) {
 							newLine();
@@ -272,8 +272,8 @@ public:
 				if(i + 2 < text.size()) {
 					code |= ((uint8_t)text[i + 1]) << 8;
 					code |= ((uint8_t)text[i + 2]) << 16;
-					auto res = _jpFont.find(code);
-					if(res != _jpFont.end()) {
+					auto res = _uniFont.find(code);
+					if(res != _uniFont.end()) {
 						if(maxWidth > 0 && x + 8 > maxWidth) {
 							newLine();
 						}
